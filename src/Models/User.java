@@ -1,9 +1,20 @@
 package Models;
 
-public class Client extends User {
+public class User {
+    
+    protected int identification;
+    protected String name;
+    protected String email;
+    protected String password;
 
-    public Client() {
-        super();
+    public User() {
+    }
+    
+    public User(int identification, String name, String email, String password) {
+        this.identification = identification;
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
     public int getIdentification() {
@@ -36,5 +47,6 @@ public class Client extends User {
 
     public void setPassword(String password) {
         this.password = password;
-    }    
+    }
+       
 }
