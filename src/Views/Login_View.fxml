@@ -1,14 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller_Login_View">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="login-main-pane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23" fx:controller="Controllers.Controller_Login_View">
     <stylesheets>
-        <URL value="@/StyleSheets/Styles.css"/>
+        <URL value="@../StyleSheets/Styles.css" />
     </stylesheets>
+    
+    <HBox fx:id="mainContainer" alignment="CENTER_LEFT" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        
+        <!-- Sección Izquierda: Ilustración y Redes Sociales -->
+        <VBox fx:id="leftSection" alignment="CENTER_LEFT" prefHeight="720.0" prefWidth="640.0" styleClass="left-section">
+            <!-- Contenedor de íconos de redes sociales e imagen -->
+            <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="social-icons-container">
+                <!-- Íconos de redes sociales -->
+                <VBox alignment="BOTTOM_CENTER" spacing="40.0" styleClass="social-icons-vbox">
+                    <ImageView fx:id="githubIcon" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#onGithubClick" onMouseEntered="#onGithubEnter" onMouseExited="#onGithubExit" pickOnBounds="true" preserveRatio="true" styleClass="social-icon github-icon">
+                        <image>
+                            <Image url="@../Images/git1.png" />
+                        </image>
+                    </ImageView>
+                    <ImageView fx:id="whatsappIcon" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#onWhatsAppClick" onMouseEntered="#onWhatsAppEnter" onMouseExited="#onWhatsAppExit" pickOnBounds="true" preserveRatio="true" styleClass="social-icon whatsapp-icon">
+                        <image>
+                            <Image url="@../Images/whats1.png" />
+                        </image>
+                    </ImageView>
+                </VBox>
+                <!-- Contenedor de imagen de Unboxing con bordes redondeados superiores -->
+                <StackPane styleClass="unboxing-container">
+                    <ImageView fx:id="unboxingImage" fitHeight="600.0" fitWidth="520.0" pickOnBounds="true" preserveRatio="true" styleClass="unboxing-image">
+                        <image>
+                            <Image url="@../Images/Unboxing.jpg" />
+                        </image>
+                    </ImageView>
+                </StackPane>
+            </HBox>
+        </VBox>
+        
+        <!-- Sección Derecha: Logo y Formulario de Login -->
+        <VBox fx:id="rightSection" alignment="CENTER" prefHeight="720.0" prefWidth="640.0" spacing="40.0" styleClass="right-section">
+            
+            <!-- Ícono de configuración -->
+            <AnchorPane prefHeight="6.0" prefWidth="520.0">
+                <ImageView fx:id="settingsIcon" fitHeight="60.0" fitWidth="60.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true" styleClass="settings-icon" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="-18.0">
+                    <image>
+                        <Image url="@../Images/Settings.png" />
+                    </image>
+                </ImageView>
+            </AnchorPane>
+            
+            <!-- Logo -->
+            <ImageView fx:id="logoImage" fitHeight="234.0" fitWidth="234.0" pickOnBounds="true" preserveRatio="true" styleClass="logo-image">
+                <image>
+                    <Image url="@../Images/Logo.png" />
+                </image>
+            </ImageView>
+            
+            <!-- Formulario de Login -->
+            <VBox alignment="CENTER_LEFT" spacing="25.0" styleClass="login-form-container">
+                
+                <!-- Campo de Usuario -->
+                <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="input-container">
+                    <Label fx:id="userIcon" styleClass="input-icon" text="👤" />
+                    <TextField fx:id="usernameField" prefHeight="50.0" prefWidth="350.0" promptText="Usuario" styleClass="login-input" />
+                </HBox>
+                
+                <!-- Campo de Contraseña -->
+                <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="input-container">
+                    <Label fx:id="passwordIcon" styleClass="input-icon" text="🔒" />
+                    <PasswordField fx:id="passwordField" prefHeight="50.0" prefWidth="350.0" promptText="Contraseña" styleClass="login-input" />
+                </HBox>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                      
+                      <!-- Botón INGRESAR -->
+                      <Button fx:id="loginButton" layoutX="48.0" layoutY="4.0" mnemonicParsing="false" onAction="#onLoginClick" prefHeight="50.0" prefWidth="350.0" styleClass="login-button" text="INGRESAR" />
+               </children>
+            </Pane>
+                
+            </VBox>
+        </VBox>
+    </HBox>
 </AnchorPane>
