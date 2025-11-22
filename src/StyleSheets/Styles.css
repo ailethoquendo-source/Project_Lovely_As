@@ -7,18 +7,30 @@
 
 /* Pane principal del login */
 .login-main-pane {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: #F8DFDF;
+}
+
+/* Sección superior*/
+.top-section {
+    -fx-background-color: #F8DFDF;
+    -fx-padding: 0;
+}
+
+/* Sección inferior*/
+.bottom-section {
+    -fx-background-color: linear-gradient(to right, #F8DFDF, #F8DFDF, #E75480, #E75480);
+    -fx-padding: 0;
 }
 
 /* Sección izquierda */
 .left-section {
-    -fx-background-color: #F8DFDF;
+    -fx-background-color: none;
     -fx-padding: 0;
 }
 
 .social-icons-container {
     -fx-padding: 0 0 0 40;
-    -fx-background-color: #F8DFDF;
+    -fx-background-color: none;
     -fx-alignment: center-left;
 }
 
@@ -36,8 +48,12 @@
     -fx-opacity: 1.0;
 }
 
-/* Contenedor de imagen de unboxing con bordes redondeados superiores */
+/* Contenedor de imagen de unboxing con bordes redondeados */
 .unboxing-container {
+    -fx-border-color: #FFD700;
+    -fx-border-width: 2;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
     -fx-padding: 0;
 }
 
@@ -47,7 +63,7 @@
 
 /* Sección derecha */
 .right-section {
-    -fx-background-color: #F6F5E1;
+    -fx-background-color: none;
     -fx-padding: 40 60 40 60;
 }
 
