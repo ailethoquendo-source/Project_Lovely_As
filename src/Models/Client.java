@@ -2,8 +2,8 @@ package Models;
 
 public class Client extends User {
 
-    public Client() {
-        super();
+    public Client(int identification, String name, String email, String password) {
+        super(identification, name, email, password);
     }
 
     public int getIdentification() {
