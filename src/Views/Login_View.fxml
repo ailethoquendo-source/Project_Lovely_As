@@ -28,7 +28,7 @@
             
             <!-- Ícono de configuración -->
             <AnchorPane prefHeight="14.0" prefWidth="520.0">
-                <ImageView fx:id="settingsIcon" fitHeight="60.0" fitWidth="60.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true" styleClass="settings-icon" onMouseClicked="#onSettingsClick" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="-18.0">
+                <ImageView fx:id="settingsIcon" fitHeight="60.0" fitWidth="60.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true" styleClass="settings-icon" onMouseClicked="#onSettingsClick" onMouseEntered="#onSettingsEnter" onMouseExited="#onSettingsExit" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="-18.0">
                     <image>
                         <Image url="@../Images/Settings.png" />
                     </image>

@@ -27,6 +27,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.animation.RotateTransition;
+import javafx.util.Duration;
 
 public class Controller_Login_View implements Initializable {
 
@@ -136,6 +138,30 @@ public class Controller_Login_View implements Initializable {
         if (settingsPopup != null) {
             settingsPopup.setVisible(!settingsPopup.isVisible());            
             event.consume();
+        }
+    }
+
+    @FXML
+    private void onSettingsEnter(MouseEvent event) {
+        if (settingsIcon != null) {
+            RotateTransition rotateTransition = new RotateTransition(Duration.millis(500), settingsIcon);
+            rotateTransition.setFromAngle(0);
+            rotateTransition.setToAngle(360);
+            rotateTransition.setCycleCount(1);
+            rotateTransition.setAutoReverse(false);
+            rotateTransition.play();
+        }
+    }
+
+    @FXML
+    private void onSettingsExit(MouseEvent event) {
+        if (settingsIcon != null) {
+            RotateTransition rotateTransition = new RotateTransition(Duration.millis(500), settingsIcon);
+            rotateTransition.setFromAngle(settingsIcon.getRotate());
+            rotateTransition.setToAngle(0);
+            rotateTransition.setCycleCount(1);
+            rotateTransition.setAutoReverse(false);
+            rotateTransition.play();
         }
     }
 
