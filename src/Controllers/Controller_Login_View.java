@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +28,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.animation.RotateTransition;
 import javafx.util.Duration;
 
 public class Controller_Login_View implements Initializable {
@@ -129,25 +129,16 @@ public class Controller_Login_View implements Initializable {
     }
 
     @FXML
-    private void onLoginClick(ActionEvent event) {
-        // Obtener los valores de los campos
+    private void onLoginClick(ActionEvent event) {        
         String username = usernameField.getText().trim();
         String password = passwordField.getText();
-
-        // Validar campos vacíos
+        
         if (username.isEmpty() || password.isEmpty()) {
-            // Mostrar mensaje de error si hay campos vacíos
-            // Por ahora, solo validamos
             return;
         }
-
-        // Validar usuario con el archivo
+        
         if (Controller_Signing_View.validateUser(username, password)) {
-            // Usuario válido - aquí puedes navegar a la vista principal
-            // Por ahora, solo validamos
         } else {
-            // Usuario inválido - mostrar mensaje de error
-            // Por ahora, solo validamos
         }
     }
 
