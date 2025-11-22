@@ -9,8 +9,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -22,6 +26,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 public class Controller_Login_View implements Initializable {
 
@@ -53,18 +58,18 @@ public class Controller_Login_View implements Initializable {
     private Label userIcon;
     @FXML
     private Label passwordIcon;
+    @FXML
+    private StackPane settingsPopup;
+    @FXML
+    private Button loginOptionButton;
+    @FXML
+    private Button signingUpOptionButton;
 
     private final Image gitNormal = new Image(getClass().getResourceAsStream("/Images/git1.png"));
     private final Image gitHover = new Image(getClass().getResourceAsStream("/Images/git2.png"));
     private final Image whatsNormal = new Image(getClass().getResourceAsStream("/Images/whats1.png"));
     private final Image whatsHover = new Image(getClass().getResourceAsStream("/Images/whats2.png"));
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        if (unboxingImage != null && unboxingContainer != null) {
-            applyRoundedCorners();
-        }
-    }
 
     private void applyRoundedCorners() {
         double radius = 30.0;
@@ -124,6 +129,90 @@ public class Controller_Login_View implements Initializable {
     @FXML
     private void onLoginClick(ActionEvent event) {
 
+    }
+
+    @FXML
+    private void onSettingsClick(MouseEvent event) {
+        if (settingsPopup != null) {
+            settingsPopup.setVisible(!settingsPopup.isVisible());            
+            event.consume();
+        }
+    }
+
+    @FXML
+    private void onLoginOptionClick(ActionEvent event) {
+        try {            
+            event.consume();            
+            if (settingsPopup != null) {
+                settingsPopup.setVisible(false);
+            }            
+        } catch (Exception e) {
+            Logger.getLogger(Controller_Login_View.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    @FXML
+    private void onSigningUpOptionClick(ActionEvent event) {
+        try {            
+            event.consume();            
+            if (settingsPopup != null) {
+                settingsPopup.setVisible(false);
+            }
+                        
+            Parent root = FXMLLoader.load(getClass().getResource("/Views/Signing_View.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            Logger.getLogger(Controller_Login_View.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        if (unboxingImage != null && unboxingContainer != null) {
+            applyRoundedCorners();
+        }
+                
+        if (settingsPopup != null) {
+            settingsPopup.setOnMouseClicked((MouseEvent event) -> {                
+                Object target = event.getTarget();
+                                
+                boolean isClickOnButton = false;
+                
+                if (target == loginOptionButton || target == signingUpOptionButton) {
+                    isClickOnButton = true;
+                } else if (target instanceof javafx.scene.Node) {
+                    Node node = (javafx.scene.Node) target;                    
+                    Node parent = node.getParent();
+                    while (parent != null && parent != settingsPopup) {
+                        if (parent == loginOptionButton || parent == signingUpOptionButton) {
+                            isClickOnButton = true;
+                            break;
+                        }
+                        parent = parent.getParent();
+                    }
+                }
+                                
+                if (!isClickOnButton) {
+                    settingsPopup.setVisible(false);
+                    event.consume();
+                }
+            });
+                        
+            if (loginOptionButton != null) {
+                loginOptionButton.setOnMouseClicked((MouseEvent event) -> {
+                    event.consume();
+                });
+            }
+            
+            if (signingUpOptionButton != null) {
+                signingUpOptionButton.setOnMouseClicked((MouseEvent event) -> {
+                    event.consume();
+                });
+            }
+        }
     }
 
 }

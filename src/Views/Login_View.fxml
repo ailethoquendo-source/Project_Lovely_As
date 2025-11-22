@@ -28,7 +28,7 @@
             
             <!-- Ícono de configuración -->
             <AnchorPane prefHeight="14.0" prefWidth="520.0">
-                <ImageView fx:id="settingsIcon" fitHeight="60.0" fitWidth="60.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true" styleClass="settings-icon" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="-18.0">
+                <ImageView fx:id="settingsIcon" fitHeight="60.0" fitWidth="60.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true" styleClass="settings-icon" onMouseClicked="#onSettingsClick" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="-18.0">
                     <image>
                         <Image url="@../Images/Settings.png" />
                     </image>
@@ -116,4 +116,12 @@
              </StackPane>
          </HBox>
      </VBox>
+     
+     <!-- Popup de opciones de Settings -->
+     <StackPane fx:id="settingsPopup" alignment="CENTER" mouseTransparent="false" styleClass="settings-popup-overlay" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <VBox alignment="CENTER" spacing="15.0" styleClass="settings-popup-container">
+             <Button fx:id="loginOptionButton" mnemonicParsing="false" onAction="#onLoginOptionClick" prefHeight="50.0" prefWidth="350.0" styleClass="login-button" text="Login" />
+             <Button fx:id="signingUpOptionButton" mnemonicParsing="false" onAction="#onSigningUpOptionClick" prefHeight="50.0" prefWidth="350.0" styleClass="login-button" text="Signing Up" />
+         </VBox>
+     </StackPane>
 </AnchorPane>
