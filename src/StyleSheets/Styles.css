@@ -150,3 +150,101 @@
     -fx-padding: 40;
     -fx-background-color: transparent;
 }
+
+/* Vista de Signing (Registro) */
+.signing-main-pane {
+    -fx-background-color: #F8DFDF;
+}
+
+/* Sección izquierda de Signing */
+.signing-left-section {
+    -fx-background-color: #F8DFDF;
+    -fx-padding: 40 40 40 40;
+    -fx-background-radius: 0;
+}
+
+/* Contenedor de imagen de Signing */
+.signing-image-container {
+    -fx-background-color: transparent;
+    -fx-border-color: #FFD700;
+    -fx-border-width: 2;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-padding: 0;
+}
+
+.signing-image {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 15, 0, 0, 3);
+}
+
+/* Cajas de instrucciones */
+.instruction-box {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 15;
+    -fx-border-color: #FFD700;
+    -fx-border-width: 2;
+    -fx-border-radius: 15;
+    -fx-padding: 15 20 15 20;
+    -fx-min-height: 50;
+}
+
+.instruction-number {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E75480;
+    -fx-min-width: 30;
+    -fx-alignment: center;
+}
+
+.instruction-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+    -fx-wrap-text: true;
+    -fx-pref-width: 650;
+}
+
+/* Sección derecha de Signing */
+.signing-right-section {
+    -fx-background-color: linear-gradient(to bottom, #F8DFDF, #E75480);
+    -fx-padding: 40 20 40 20;
+}
+
+/* Logo circular de Signing */
+.signing-logo-container {
+    -fx-border-color: #FFD700;
+    -fx-border-width: 3;
+    -fx-border-radius: 90;
+    -fx-background-radius: 90;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 10;
+}
+
+.signing-logo-image {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 2);
+}
+
+.signing-logo-text {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E75480;
+    -fx-font-style: italic;
+}
+
+.signing-logo-subtext {
+    -fx-font-size: 14px;
+    -fx-text-fill: #E75480;
+}
+
+/* Contenedor del formulario de registro */
+.signing-form-container {
+    -fx-padding: 20;
+    -fx-background-color: transparent;
+}
+
+/* Etiqueta de error */
+.error-label {
+    -fx-text-fill: #FF0000;
+    -fx-font-size: 12px;
+    -fx-wrap-text: true;
+    -fx-pref-width: 350;
+}
