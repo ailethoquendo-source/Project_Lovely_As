@@ -1,14 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller_Signing_View">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="signing-main-pane" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller_Signing_View">
     <stylesheets>
-        <URL value="@/StyleSheets/Styles.css"/>
+        <URL value="@../StyleSheets/Styles.css" />
     </stylesheets>
+    
+    <!-- Contenedor principal con HBox -->
+    <HBox fx:id="mainContainer" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        
+        <!-- Sección Izquierda (60%): Ilustración y Cajas de Instrucciones -->
+        <VBox fx:id="leftSection" alignment="TOP_CENTER" prefHeight="720.0" prefWidth="768.0" spacing="30.0" styleClass="signing-left-section" HBox.hgrow="ALWAYS">
+            <VBox.margin>
+                <Insets bottom="40.0" left="40.0" right="20.0" top="40.0" />
+            </VBox.margin>
+            
+            <!-- Imagen de Signing -->
+            <StackPane fx:id="signingImageContainer" prefHeight="400.0" prefWidth="700.0" styleClass="signing-image-container">
+                <ImageView fx:id="signingImage" fitHeight="400.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true" styleClass="signing-image">
+                    <image>
+                        <Image url="@../Images/SigningImage.jpg" />
+                    </image>
+                </ImageView>
+            </StackPane>
+            
+            <!-- Cajas de Instrucciones -->
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="737.0" spacing="15.0">
+            <HBox prefHeight="214.0" prefWidth="704.0" spacing="20.0">
+               <children>
+                      
+                            <!-- Caja 1 -->
+                      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="700.0" spacing="15.0" styleClass="instruction-box">
+                          <Label styleClass="instruction-number">1</Label>
+                          <Label styleClass="instruction-text" text="Primero: Diligencie el formulario de registro, Verifique que los datos ingresados sean validos." wrapText="true" />
+                      </HBox>
+                      
+                            <!-- Caja 2 -->
+                      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="700.0" spacing="15.0" styleClass="instruction-box">
+                          <Label styleClass="instruction-number">2</Label>
+                          <Label styleClass="instruction-text" text="Segundo: Verifica tu contraseña antes de confirmar el registro." wrapText="true" />
+                      </HBox>
+                      
+                            <!-- Caja 3 -->
+                      <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="700.0" spacing="15.0" styleClass="instruction-box">
+                          <Label styleClass="instruction-number">3</Label>
+                          <Label styleClass="instruction-text" text="Tercero: Cuando hayas verificado y confirmado tu registro podrás disfrutar, de una amplia variedad de prendas." wrapText="true" />
+                      </HBox>
+               </children>
+            </HBox>
+                
+            </VBox>
+        </VBox>
+        
+        <!-- Sección Derecha (40%): Formulario de Registro -->
+        <VBox fx:id="rightSection" alignment="CENTER" prefHeight="720.0" prefWidth="512.0" spacing="30.0" styleClass="signing-right-section" HBox.hgrow="NEVER">
+            <VBox.margin>
+                <Insets bottom="40.0" left="20.0" right="40.0" top="40.0" />
+            </VBox.margin>
+            
+            <!-- Ícono de configuración -->
+            <AnchorPane prefHeight="14.0" prefWidth="450.0">
+                <ImageView fx:id="settingsIcon" fitHeight="60.0" fitWidth="60.0" layoutY="-18.0" onMouseClicked="#onSettingsClick" onMouseEntered="#onSettingsEnter" onMouseExited="#onSettingsExit" pickOnBounds="true" preserveRatio="true" styleClass="settings-icon" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="-18.0">
+                    <image>
+                        <Image url="@../Images/Settings.png" />
+                    </image>
+                </ImageView>
+            </AnchorPane>
+            
+            <!-- Logo -->
+            <StackPane fx:id="logoContainer" prefHeight="180.0" prefWidth="180.0">
+                <ImageView fx:id="logoImage" fitHeight="180.0" fitWidth="180.0" onMouseClicked="#onLogoClick" pickOnBounds="true" preserveRatio="true" styleClass="signing-logo-image">
+                    <image>
+                        <Image url="@../Images/Logo.png" />
+                    </image>
+                </ImageView>
+            </StackPane>
+            
+            <!-- Formulario de Registro -->
+            <VBox alignment="CENTER_LEFT" prefHeight="300.0" prefWidth="450.0" spacing="20.0" styleClass="signing-form-container">
+            <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="input-container">
+               <children>
+                  <Label fx:id="userIcon1" styleClass="input-icon">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/User.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <TextField fx:id="useridentField" prefHeight="50.0" prefWidth="350.0" promptText="Identificación" styleClass="login-input" />
+               </children>
+            </HBox>
+                
+                <!-- Campo de Usuario/Email -->
+                <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="input-container">
+                    <Label fx:id="userIcon" styleClass="input-icon">
+                        <graphic>
+                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../Images/User.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+                    </Label>
+                    <TextField fx:id="usernameField" prefHeight="50.0" prefWidth="350.0" promptText="Email" styleClass="login-input" />
+                </HBox>
+                
+                <!-- Campo de Contraseña -->
+                <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="input-container">
+                    <Label fx:id="passwordIcon" styleClass="input-icon">
+                        <graphic>
+                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../Images/Lock.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+                    </Label>
+                    <PasswordField fx:id="passwordField" prefHeight="50.0" prefWidth="350.0" promptText="Contraseña" styleClass="login-input" />
+                </HBox>
+                
+                <!-- Campo de Confirmar Contraseña -->
+                <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="input-container">
+                    <Label fx:id="confirmPasswordIcon" styleClass="input-icon">
+                        <graphic>
+                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../Images/Lock.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+                    </Label>
+                    <PasswordField fx:id="confirmPasswordField" prefHeight="50.0" prefWidth="350.0" promptText="Confirmar Contraseña" styleClass="login-input" />
+                </HBox>
+                
+                <!-- Mensaje de error -->
+                <Label fx:id="errorLabel" styleClass="error-label" text="" visible="false" wrapText="true" />
+                
+                <!-- Botón Confirmar Registro -->
+                <Pane prefHeight="50.0" prefWidth="365.0">
+                    <Button fx:id="confirmButton" layoutX="55.5" layoutY="-20.0" mnemonicParsing="false" onAction="#onConfirmRegistration" prefHeight="50.0" prefWidth="350.0" styleClass="login-button" text="Confirmar Registro" />
+                </Pane>
+                
+            </VBox>
+        </VBox>
+    </HBox>
+    
+    <!-- Popup de opciones de Settings -->
+    <StackPane fx:id="settingsPopup" alignment="CENTER" mouseTransparent="false" styleClass="settings-popup-overlay" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox alignment="CENTER" spacing="15.0" styleClass="settings-popup-container">
+            <Button fx:id="loginOptionButton" mnemonicParsing="false" onAction="#onLoginOptionClick" prefHeight="50.0" prefWidth="350.0" styleClass="login-button" text="Login" />
+            <Button fx:id="signingUpOptionButton" mnemonicParsing="false" onAction="#onSigningUpOptionClick" prefHeight="50.0" prefWidth="350.0" styleClass="login-button" text="Signing Up" />
+        </VBox>
+    </StackPane>
 </AnchorPane>
