@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -18,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
@@ -38,6 +40,8 @@ public class Controller_Login_View implements Initializable {
     @FXML
     private ImageView unboxingImage;
     @FXML
+    private StackPane unboxingContainer;
+    @FXML
     private HBox mainContainer;
     @FXML
     private VBox leftSection;
@@ -57,40 +61,29 @@ public class Controller_Login_View implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        if (unboxingImage != null) {
-            unboxingImage.imageProperty().addListener((obs, oldImage, newImage) -> {
-                if (newImage != null) {
-                    applyUnboxingClip();
-                }
-            });
-
-            if (unboxingImage.getImage() != null) {
-                applyUnboxingClip();
-            }
+        if (unboxingImage != null && unboxingContainer != null) {
+            applyRoundedCorners();
         }
     }
 
-    private void applyUnboxingClip() {
-        double width = 520.0;
-        double height = 600.0;
+    private void applyRoundedCorners() {
         double radius = 30.0;
-
-        Rectangle clip = new Rectangle(0, 0, width, height);
-
+        double width = unboxingImage.getFitWidth();
+        double height = unboxingImage.getFitHeight();
+                
+        Rectangle clip = new Rectangle(width, height);
         clip.setArcWidth(radius * 2);
         clip.setArcHeight(radius * 2);
-
+        
         Image img = unboxingImage.getImage();
-        if (img != null) {
-            double imageWidth = img.getWidth();
-            double imageHeight = img.getHeight();
-
-            double viewportY = imageHeight * 0.15;
-            double viewportHeight = Math.min(height, imageHeight * 0.85); // Mostrar el 85% restante
-
-            unboxingImage.setViewport(new javafx.geometry.Rectangle2D(0, viewportY, imageWidth, viewportHeight));
+        if (img != null && (img.getWidth() > width || img.getHeight() > height)) {
+            double imgWidth = img.getWidth();
+            double imgHeight = img.getHeight();
+            double startX = Math.max(0, (imgWidth - width) / 2);
+            double startY = Math.max(0, (imgHeight - height) / 2);
+            unboxingImage.setViewport(new Rectangle2D(startX, startY, width, height));
         }
-
+                
         unboxingImage.setClip(clip);
     }
 
