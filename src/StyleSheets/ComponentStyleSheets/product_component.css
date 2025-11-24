@@ -1,0 +1,97 @@
+/* Contenedor principal - Fondo gris claro */
+.product-card-container {
+    -fx-background-color: transparent;
+}
+
+/* Contenedor wrapper del card */
+.card-wrapper {
+    -fx-background-color: transparent;
+}
+
+/* Contenedor principal del producto - Borde amarillo brillante y fondo azul claro */
+.product-content-container {
+    -fx-background-color: #E0F2FE;
+    -fx-background-radius: 10px;
+    -fx-border-color: #FCD34D;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+}
+
+/* Contenedor de la imagen del producto */
+.product-image-container {
+    -fx-background-color: transparent;
+}
+
+.product-image {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+/* Selector de talla - Fondo blanco */
+.size-selector {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 5px;
+    -fx-border-color: #DB2777;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-padding: 3px;
+    -fx-font-size: 11px;
+    -fx-text-fill: #000000;
+}
+
+.size-selector:hover {
+    -fx-border-color: #9CA3AF;
+}
+
+.size-selector:focused {
+    -fx-border-color: #8B5CF6;
+    -fx-border-width: 2px;
+}
+
+/* Estilo del popup del ComboBox */
+.size-selector .list-view {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 8px;
+}
+
+.size-selector .list-cell {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #000000;    
+}
+
+.size-selector .list-cell:hover {
+    -fx-background-color: #FFFFFF;
+}
+
+.size-selector .list-cell:selected {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #000000;
+}
+
+/* Etiqueta de precio */
+.price-label {
+    -fx-text-fill: #000000;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+/* Botón Agregar al carrito - Fondo rosa degradado */
+.add-to-cart-button {
+    -fx-background-color: linear-gradient(to bottom, #EC4899, #F472B6);
+    -fx-background-radius: 5px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(236, 72, 153, 0.3), 3, 0, 0, 1);
+}
+
+.add-to-cart-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #DB2777, #EC4899);
+    -fx-effect: dropshadow(gaussian, rgba(236, 72, 153, 0.5), 8, 0, 0, 3);
+}
+
+.add-to-cart-button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #BE185D, #DB2777);
+    -fx-effect: dropshadow(gaussian, rgba(236, 72, 153, 0.2), 3, 0, 0, 1);
+}
+

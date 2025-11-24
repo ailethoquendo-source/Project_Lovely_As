@@ -2,10 +2,6 @@ package Controllers;
 
 import DataStructures.Data_Manager;
 import DataStructures.List_Double_User;
-import Models.Admin;
-import Models.Client;
-import Models.Nodes.Node_User;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,6 +10,7 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.RotateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,9 +50,6 @@ public class Controller_Signing_View implements Initializable {
     private Button signingUpOptionButton;
     @FXML
     private Label errorLabel;
-
-    private static final String USERS_FILE_PATH = "src/Files/Users";
-    private static final String DELIMITER = ":";
     @FXML
     private HBox mainContainer;
     @FXML
@@ -80,38 +74,34 @@ public class Controller_Signing_View implements Initializable {
     private Label passwordIcon;
     @FXML
     private Label confirmPasswordIcon;
-    
+
     // Contador de clics en el logo para determinar Admin/Client
     private int logoClickCount = 0;
     private Timer clickTimer;
     private static final long CLICK_TIMEOUT = 2000; // 2 segundos para resetear el contador
     private boolean isAdmin = false;
-        
-    private Data_Manager dataManager;
-    private List_Double_User userList;
-        
-    private String getUsersFilePath() {        
-        String currentDir = System.getProperty("user.dir");
-        return currentDir + File.separator + USERS_FILE_PATH;
-    }
+
+    private final List_Double_User userList = Data_Manager.getManager().getList_user();
+    @FXML
+    private Label userIcon11;
+    @FXML
+    private TextField useremailField;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {        
-        dataManager = Data_Manager.getManager();
-        userList = dataManager.getList_user();
-                
+    public void initialize(URL url, ResourceBundle rb) {
+
         try {
             userList.load_data_from_file_users();
         } catch (Exception e) {
             Logger.getLogger(Controller_Signing_View.class.getName()).log(Level.WARNING, "No se pudieron cargar usuarios existentes", e);
         }
-                
+
         if (logoImage != null) {
             logoImage.setOnMouseClicked((MouseEvent event) -> {
                 onLogoClick(event);
             });
         }
-        
+
         if (settingsPopup != null) {
             settingsPopup.setOnMouseClicked((MouseEvent event) -> {
                 Object target = event.getTarget();
@@ -150,7 +140,7 @@ public class Controller_Signing_View implements Initializable {
                 });
             }
         }
-        
+
         if (useridentField != null) {
             useridentField.setOnKeyTyped(e -> hideError());
         }
@@ -163,78 +153,126 @@ public class Controller_Signing_View implements Initializable {
         if (confirmPasswordField != null) {
             confirmPasswordField.setOnKeyTyped(e -> hideError());
         }
+                
+        Platform.runLater(() -> {
+            if (confirmButton != null && confirmButton.getScene() != null) {
+                Stage stage = (Stage) confirmButton.getScene().getWindow();
+                if (stage != null) {
+                    stage.setOnCloseRequest(e -> {
+                        e.consume();
+                        redirectToLogin(stage);
+                    });
+                }
+            }
+        });
     }
-
-    @FXML
-    private void onConfirmRegistration(ActionEvent event) {        
-        hideError();
-        
-        String identification = useridentField.getText().trim();
-        String username = usernameField.getText().trim();
-        String password = passwordField.getText();
-        String confirmPassword = confirmPasswordField.getText();
+    
+    private void redirectToLogin(Stage currentStage) {
+        try {            
+            double currentWidth = currentStage.getWidth();
+            double currentHeight = currentStage.getHeight();
+            double currentX = currentStage.getX();
+            double currentY = currentStage.getY();
+            boolean isMaximized = currentStage.isMaximized();
+            
+            // Eliminar el handler de cierre para permitir cerrar la aplicación desde login
+            currentStage.setOnCloseRequest(null);
+            
+            Parent root = FXMLLoader.load(getClass().getResource("/Views/Login_View.fxml"));
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
                         
-        if (identification.isEmpty() || username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            if (isMaximized) {
+                currentStage.setMaximized(true);
+            } else {
+                currentStage.setWidth(currentWidth);
+                currentStage.setHeight(currentHeight);
+                currentStage.setX(currentX);
+                currentStage.setY(currentY);
+            }
+            
+            currentStage.show();
+        } catch (IOException e) {
+            Logger.getLogger(Controller_Signing_View.class.getName()).log(Level.SEVERE, "Error al redirigir al login", e);
+        }
+    }
+    
+    @FXML
+    private void onConfirmRegistration(ActionEvent event) {
+        hideError();
+
+        if (useridentField.getText().isEmpty() || useremailField.getText().isEmpty() || passwordField.getText().isEmpty() || confirmPasswordField.getText().isEmpty()) {
             showError("Por favor, complete todos los campos.");
             return;
         }
-                        
-        if (!isValidIdentification(identification)) {
+
+        if (!isValidIdentification(useridentField.getText())) {
             showError("La identificación debe ser numérica y tener al menos 7 dígitos.");
             return;
         }
-                
-        if (!isValidUsername(username)) {
+
+        if (!isValidUsername(useremailField.getText())) {
             showError("El email debe ser válido.");
             return;
         }
-        
-        if (password.length() < 6) {
+
+        if (passwordField.getText().length() < 6) {
             showError("La contraseña debe tener al menos 6 caracteres.");
             return;
         }
-                        
-        if (!password.equals(confirmPassword)) {
+
+        if (!passwordField.getText().equals(confirmPasswordField.getText())) {
             showError("Las contraseñas no coinciden. Por favor, verifique.");
             return;
         }
-               
+
         String roll = isAdmin ? "ADMIN" : "CLIENT";
-               
-        String name = username.split("@")[0];
-                
-        try {
-            int identificationInt = Integer.parseInt(identification);
-                       
-            Node_User existingUser = userList.search_email(username);
-            if (existingUser != null) {
-                showError("Este email ya está registrado. Por favor, use otro email.");
-                return;
-            }
-                        
-            Node_User newUser = null;
-            if (roll.equals("ADMIN")) {
-                Admin admin = new Admin(identificationInt, name, username, password);
-                newUser = new Node_User(admin);
-            } else {
-                Client client = new Client(identificationInt, name, username, password);
-                newUser = new Node_User(client);
-            }
-                        
-            if (userList.getHead() == null) {
-                userList.setHead(newUser);
-            } else {
-                newUser.setNext(userList.getHead());
-                userList.getHead().setFormer(newUser);
-                userList.setHead(newUser);
-            }
-                        
+
+        try {                       
+
+            userList.addUser(usernameField, useridentField, useremailField, passwordField, roll);
+           
             userList.save_data_file_users();
-            
-            showSuccess("Registro exitoso como " + roll + ". Puede iniciar sesión ahora.");
-            clearFields();            
+
+            showSuccess("Registro exitoso como " + roll + ". Redirigiendo al login...");
+            clearFields();
             logoClickCount = 0;
             isAdmin = false;
+                        
+            Stage currentStage = (Stage) confirmButton.getScene().getWindow();
+            double currentWidth = currentStage.getWidth();
+            double currentHeight = currentStage.getHeight();
+            double currentX = currentStage.getX();
+            double currentY = currentStage.getY();
+            boolean isMaximized = currentStage.isMaximized();
+                        
+            Timer redirectTimer = new Timer();
+            redirectTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(() -> {
+                        try {
+                            Parent root = FXMLLoader.load(getClass().getResource("/Views/Login_View.fxml"));
+                            Scene scene = new Scene(root);
+                            currentStage.setScene(scene);
+                                                        
+                            if (isMaximized) {
+                                currentStage.setMaximized(true);
+                            } else {
+                                currentStage.setWidth(currentWidth);
+                                currentStage.setHeight(currentHeight);
+                                currentStage.setX(currentX);
+                                currentStage.setY(currentY);
+                            }
+                            
+                            currentStage.show();
+                        } catch (IOException e) {
+                            Logger.getLogger(Controller_Signing_View.class.getName()).log(Level.SEVERE, "Error al redirigir al login", e);
+                        }
+                    });
+                }
+            }, 2000);
+            
         } catch (NumberFormatException e) {
             showError("La identificación debe ser un número válido.");
         } catch (Exception e) {
@@ -242,20 +280,20 @@ public class Controller_Signing_View implements Initializable {
             showError("Error al guardar el registro. Por favor, intente nuevamente.");
         }
     }
-       
+
     @FXML
     private void onLogoClick(MouseEvent event) {
         logoClickCount++;
-                
+
         if (clickTimer != null) {
             clickTimer.cancel();
         }
-                
+
         if (logoClickCount >= 3) {
             isAdmin = true;
             showSuccess("Modo Administrador activado. El próximo registro será como ADMIN.");
             logoClickCount = 0;
-        } else {            
+        } else {
             clickTimer = new Timer();
             clickTimer.schedule(new TimerTask() {
                 @Override
@@ -265,7 +303,7 @@ public class Controller_Signing_View implements Initializable {
                 }
             }, CLICK_TIMEOUT);
         }
-        
+
         event.consume();
     }
 
@@ -309,11 +347,27 @@ public class Controller_Signing_View implements Initializable {
                 settingsPopup.setVisible(false);
             }
             
+            Stage currentStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            double currentWidth = currentStage.getWidth();
+            double currentHeight = currentStage.getHeight();
+            double currentX = currentStage.getX();
+            double currentY = currentStage.getY();
+            boolean isMaximized = currentStage.isMaximized();
+
             Parent root = FXMLLoader.load(getClass().getResource("/Views/Login_View.fxml"));
             Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
+            currentStage.setScene(scene);
+                        
+            if (isMaximized) {
+                currentStage.setMaximized(true);
+            } else {
+                currentStage.setWidth(currentWidth);
+                currentStage.setHeight(currentHeight);
+                currentStage.setX(currentX);
+                currentStage.setY(currentY);
+            }
+            
+            currentStage.show();
         } catch (IOException e) {
             Logger.getLogger(Controller_Signing_View.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -325,56 +379,20 @@ public class Controller_Signing_View implements Initializable {
             event.consume();
             if (settingsPopup != null) {
                 settingsPopup.setVisible(false);
-            }            
+            }
         } catch (Exception e) {
             Logger.getLogger(Controller_Signing_View.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-        
-    private boolean isValidIdentification(String identification) {        
+
+    private boolean isValidIdentification(String identification) {
         return identification.matches("^[0-9]{7,}$");
     }
-       
-    private boolean isValidUsername(String username) {    
+
+    private boolean isValidUsername(String username) {
         return username.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
-    }
-    
-    public static boolean validateUser(String username, String password) {
-        
-        Data_Manager manager = Data_Manager.getManager();
-        List_Double_User userList = manager.getList_user();
-            
-        try {
-            userList.load_data_from_file_users();
-        } catch (Exception e) {
-            Logger.getLogger(Controller_Signing_View.class.getName()).log(Level.WARNING, "No se pudieron cargar usuarios", e);
-        }
-                
-        Node_User foundUser = userList.search_email(username);
-        if (foundUser != null) {
-            
-            if (foundUser.getUser().getPassword().equals(password)) {
-                return true;
-            }
-        }
-                
-        try {
-            int identification = Integer.parseInt(username);
-            Node_User current = userList.getHead();
-            while (current != null) {
-                if (current.getUser().getIdentification() == identification 
-                    && current.getUser().getPassword().equals(password)) {
-                    return true;
-                }
-                current = current.getNext();
-            }
-        } catch (NumberFormatException e) {
-            
-        }
-        
-        return false;
-    }
-    
+    }  
+
     private void showError(String message) {
         if (errorLabel != null) {
             errorLabel.setText(message);

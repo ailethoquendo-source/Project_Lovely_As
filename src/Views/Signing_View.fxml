@@ -93,6 +93,20 @@
             <VBox alignment="CENTER_LEFT" prefHeight="300.0" prefWidth="450.0" spacing="20.0" styleClass="signing-form-container">
             <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="input-container">
                <children>
+                  <Label fx:id="userIcon11" styleClass="input-icon">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/User.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <TextField fx:id="usernameField" prefHeight="50.0" prefWidth="350.0" promptText="Nombre" styleClass="login-input" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="input-container">
+               <children>
                   <Label fx:id="userIcon1" styleClass="input-icon">
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
@@ -117,7 +131,7 @@
                             </ImageView>
                         </graphic>
                     </Label>
-                    <TextField fx:id="usernameField" prefHeight="50.0" prefWidth="350.0" promptText="Email" styleClass="login-input" />
+                    <TextField fx:id="useremailField" prefHeight="50.0" prefWidth="350.0" promptText="Email" styleClass="login-input" />
                 </HBox>
                 
                 <!-- Campo de Contraseña -->

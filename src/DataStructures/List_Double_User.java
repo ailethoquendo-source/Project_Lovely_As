@@ -44,7 +44,7 @@ public class List_Double_User {
     }
 
     public Node_User search_email(String email) {
-        if (getHead() == null) {
+        if (head == null) {
             return null;
         } else {
             Node_User aux = getHead();
@@ -89,32 +89,32 @@ public class List_Double_User {
         }
     }
 
-    public Node_User create_user(TextField txtName, TextField txtIdentification, TextField txtEmail, PasswordField txtPassword, String roll) {
+    public Node_User create_user(TextField usernameField, TextField useridentField, TextField useremailField, PasswordField passwordField, String roll) {
 
-        Node_User buscar = search_email(txtEmail.getText());
+        Node_User search = search_email(useremailField.getText());
 
         try {
 
-            if (buscar != null) {
+            if (search != null) {
                 alert(Alert.AlertType.WARNING, "Importante..!", "Ya existe un usuario con este correo.");
                 return null;
             } else {
                 Node_User newUser = null;
 
                 if (roll.equals("ADMIN")) {
-                    Admin admin = new Admin(Integer.parseInt(txtName.getText()), txtName.getText(), txtEmail.getText(), txtPassword.getText());
+                    Admin admin = new Admin(Integer.parseInt(useridentField.getText()), usernameField.getText(), useremailField.getText(), passwordField.getText());
                     newUser = new Node_User(admin);
                 } else {
-                    Client client = new Client(Integer.parseInt(txtName.getText()), txtName.getText(), txtEmail.getText(), txtPassword.getText());
+                    Client client = new Client(Integer.parseInt(useridentField.getText()), usernameField.getText(), useremailField.getText(), passwordField.getText());
                     newUser = new Node_User(client);
                 }
-                
+
                 alert(Alert.AlertType.CONFIRMATION, "Dialogo de confirmación", "Registro realizado con exito...!\n"
                         + "Felicidades...! ya haces parte de nuestros usuario :)");
-                txtName.setText("");
-                txtIdentification.setText("");
-                txtEmail.setText("");
-                txtPassword.setText("");
+                usernameField.setText("");
+                useridentField.setText("");
+                useremailField.setText("");
+                passwordField.setText("");
                 return newUser;
             }
 
@@ -124,24 +124,32 @@ public class List_Double_User {
 
     }
 
-    public void addUser(String name, String identification, String email, String password, String roll) {
+    public void addUser(String name, int identification, String email, String password, String roll) {
 
-        Node_User aux = null;
+        Node_User newUser = null;
 
-        if (aux != null) {
+        if (roll.equals("ADMIN")) {
+            Admin admin = new Admin(identification, name, email, password);
+            newUser = new Node_User(admin);
+        } else {
+            Client client = new Client(identification, name, email, password);
+            newUser = new Node_User(client);
+        }
+
+        if (newUser != null) {
             if (head == null) {
-                head = aux;
+                head = newUser;
             } else {
                 Node_User ultimo = getLast();
-                ultimo.setNext(aux);
-                aux.setFormer(ultimo);
+                ultimo.setNext(newUser);
+                newUser.setFormer(ultimo);
             }
         }
     }
+    
+    public void addUser(TextField usernameField, TextField useridentField, TextField useremailField, PasswordField passwordField, String roll) {
 
-    public void addUser(TextField txtName, TextField txtIdentification, TextField txtEmail, PasswordField txtPassword, String roll) {
-
-        Node_User aux = create_user(txtName, txtIdentification, txtEmail, txtPassword, roll);
+        Node_User aux = create_user(usernameField, useridentField, useremailField, passwordField, roll);
 
         if (aux != null) {
             if (getHead() == null) {
@@ -166,10 +174,10 @@ public class List_Double_User {
             while (current != null) {
 
                 writer.write((current.getUser() instanceof Admin ? "ADMIN" : "CLIENT") + ", ");
-                writer.write(current.getUser().getIdentification() + ", ");
                 writer.write(current.getUser().getName() + ", ");
+                writer.write(current.getUser().getIdentification() + ", ");                
                 writer.write(current.getUser().getEmail() + ", ");
-                writer.write(current.getUser().getPassword() + ", ");
+                writer.write(current.getUser().getPassword());
 
                 writer.newLine();
 
@@ -198,12 +206,12 @@ public class List_Double_User {
 
                 String roll = atributes[0];
                 String name = atributes[1];
-                String identification = atributes[2];
+                int identification = Integer.parseInt(atributes[2]);
                 String email = atributes[3];
                 String password = atributes[4];
 
                 addUser(name, identification, email, password, roll);
-            }
+            }            
         } catch (IOException e) {
             System.out.println("Error al cargar los datos desde el archivo Users: " + e.getMessage());
         }
