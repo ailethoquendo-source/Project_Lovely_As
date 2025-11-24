@@ -8,34 +8,41 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="180.0" prefWidth="150.0" styleClass="product-card-container" stylesheets="@../../StyleSheets/ComponentStyleSheets/product_component.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ComponentControllers.Controller_Product_Component">
+<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="280.0" styleClass="product-card-container" stylesheets="@../../StyleSheets/ComponentStyleSheets/product_component.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ComponentControllers.Controller_Product_Component">
     
     <!-- Contenedor principal con fondo gris claro -->
-    <VBox alignment="CENTER" layoutY="-4.0" prefHeight="180.0" prefWidth="150.0" spacing="5.0" styleClass="card-wrapper" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <VBox alignment="CENTER" layoutY="-4.0" prefHeight="180.0" prefWidth="160.0" spacing="5.0" styleClass="card-wrapper" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </padding>
         
         <!-- Contenedor principal del producto con borde amarillo y fondo azul claro -->
-        <VBox alignment="CENTER" spacing="5.0" styleClass="product-content-container" VBox.vgrow="ALWAYS">
+        <VBox alignment="CENTER" fillWidth="false" spacing="5.0" styleClass="product-content-container" VBox.vgrow="ALWAYS">
             <padding>
                 <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
             </padding>
             
             <!-- Imagen del producto -->
             <StackPane styleClass="product-image-container" VBox.vgrow="ALWAYS">
-                <ImageView fx:id="productImageView" fitHeight="80.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" styleClass="product-image" />
+                <ImageView fx:id="productImageView" fitHeight="180.0" fitWidth="150.0" pickOnBounds="true" styleClass="product-image" />
             </StackPane>
             
             <!-- Selector de talla -->
-            <ComboBox fx:id="sizeComboBox" prefHeight="25.0" prefWidth="120.0" promptText="Talla" styleClass="size-selector" />
+            <ComboBox fx:id="sizeComboBox" prefHeight="30.0" prefWidth="150.0" promptText="Talla" styleClass="size-selector" />
             
             <!-- Precio -->
-            <Label fx:id="priceLabel" styleClass="price-label" text="COP $ 35,900" />
+            <Label fx:id="priceLabel" styleClass="price-label" text="COP $ 35,900">
+            <font>
+               <Font name="System Bold" size="20.0" />
+            </font></Label>
             
             <!-- Botón Agregar al carrito -->
-            <Button fx:id="addToCartButton" prefHeight="25.0" prefWidth="120.0" styleClass="add-to-cart-button" text="Agregar al carrito" />
+            <Button fx:id="addToCartButton" prefHeight="35.0" prefWidth="200.0" styleClass="add-to-cart-button" text="Agregar al carrito">
+            <font>
+               <Font size="20.0" />
+            </font></Button>
         </VBox>
     </VBox>
 </AnchorPane>

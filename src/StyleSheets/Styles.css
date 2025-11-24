@@ -255,19 +255,19 @@
 
 /* Contenedor principal del dashboard */
 .main-view-container {
-    -fx-background-color: #F6F5E1;
+    -fx-background-color: linear-gradient(to right, #F8DFDF, #F8DFDF, #E75480, #E75480);
 }
 
 /* Header rosa */
 .main-header {
-    -fx-background-color: #F8DFDF;
+    -fx-background-color: linear-gradient(to right, #F8DFDF, #F8DFDF, #E75480, #E75480);
     -fx-alignment: center-left;
 }
 
 /* Email en el header */
 .header-email {
-    -fx-text-fill: #E75480;
-    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 18px;
     -fx-font-weight: bold;
 }
 

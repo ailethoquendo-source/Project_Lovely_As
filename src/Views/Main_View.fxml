@@ -11,16 +11,16 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="main-view-container" stylesheets="@../StyleSheets/Styles.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller_Main_View">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="main-view-container" stylesheets="@../StyleSheets/Styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller_Main_View">
     
     <!-- Header rosa -->
-    <HBox fx:id="headerBox" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="1280.0" spacing="10.0" styleClass="main-header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <HBox fx:id="headerBox" alignment="CENTER_LEFT" prefHeight="89.0" prefWidth="1280.0" spacing="10.0" styleClass="main-header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <padding>
             <Insets left="20.0" right="20.0" />
         </padding>
       <Pane prefHeight="200.0" prefWidth="200.0">
          <children>
-               <ImageView fitHeight="271.0" fitWidth="240.0" layoutX="-20.0" layoutY="-105.0" pickOnBounds="true">
+               <ImageView fitHeight="297.0" fitWidth="282.0" layoutX="-20.0" layoutY="-105.0" pickOnBounds="true">
                    <image>
                        <Image url="@../Images/Name_.png" />
                    </image>
@@ -30,10 +30,10 @@
         
         <!-- Email e iconos a la derecha -->
         <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="1062.0" spacing="15.0" HBox.hgrow="ALWAYS">
-            <Label fx:id="emailLabel" styleClass="header-email" text="example@gmail.com" />
-            <Button fx:id="accountButton" styleClass="header-icon-button">
+            <Label fx:id="emailLabel" prefHeight="27.0" prefWidth="197.0" styleClass="header-email" text="example@gmail.com" />
+            <Button fx:id="accountButton" prefHeight="55.0" prefWidth="65.0" styleClass="header-icon-button">
                 <graphic>
-                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                             <Image url="@../Images/Account.png" />
                         </image>
@@ -42,7 +42,7 @@
             </Button>
             <Button fx:id="historyButton" styleClass="header-icon-button">
                 <graphic>
-                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                             <Image url="@../Images/History.png" />
                         </image>
@@ -51,7 +51,7 @@
             </Button>
             <Button fx:id="favoriteButton" styleClass="header-icon-button">
                 <graphic>
-                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                             <Image url="@../Images/Favorite.png" />
                         </image>
@@ -60,7 +60,7 @@
             </Button>
             <Button fx:id="cartButton" styleClass="header-icon-button">
                 <graphic>
-                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                             <Image url="@../Images/Cart.png" />
                         </image>
@@ -71,12 +71,12 @@
     </HBox>
     
     <!-- Área principal con fondo crema -->
-    <VBox alignment="TOP_CENTER" prefHeight="660.0" prefWidth="1280.0" spacing="20.0" styleClass="main-content-area" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+    <VBox alignment="TOP_CENTER" layoutY="88.8" prefHeight="631.0" prefWidth="1280.0" spacing="20.0" styleClass="main-content-area" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
         <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
         </padding>
         
         <!-- FlowPane para productos responsive -->
-        <FlowPane fx:id="productsFlowPane" hgap="15.0" styleClass="products-container" vgap="15.0" VBox.vgrow="ALWAYS" />
+        <FlowPane fx:id="productsFlowPane" hgap="15.0" prefWrapLength="800.0" styleClass="products-container" vgap="15.0" VBox.vgrow="NEVER" />
     </VBox>
 </AnchorPane>
