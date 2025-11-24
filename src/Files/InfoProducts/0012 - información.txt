@@ -1,0 +1,5 @@
+Nombre: Pantalones casuales
+Marca: MX
+precio:$52.390
+Tallas: 08 -10 -12 -14 -16
+Descripción: Pantalones casuales de estilo retro para adolescentes, versátiles para otoño/invierno

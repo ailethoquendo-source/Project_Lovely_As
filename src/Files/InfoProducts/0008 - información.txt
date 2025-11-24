@@ -1,0 +1,5 @@
+Nombre: Vestido mini 
+Marca : in Fashion 
+precio: 59,900
+Tallas: XS-S-M-L-XL
+Descripción: Vestido mini ajustado con volante en el bajo, sin espalda , perfecto para fiestas y vacaciones. 

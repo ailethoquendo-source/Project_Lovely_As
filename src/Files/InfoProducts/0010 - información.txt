@@ -1,0 +1,5 @@
+Nombre: Vestido Largo 
+Marca : QYE
+precio: 110,900
+Tallas: XS-S-M-L-XL
+Descripción: Vestido largo de satén de seda de un solo hombro, unicolor, sexy ,con espalda descubierta y apertura alta hasta el muslo

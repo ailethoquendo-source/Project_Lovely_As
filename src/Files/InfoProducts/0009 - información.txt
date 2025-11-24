@@ -1,0 +1,5 @@
+Nombre: Vestido de verano
+Marca : DEEKA
+precio: 119,900
+Tallas: XS-S-M-L
+Descripción: Vestido de verano elegante y sexy , de gasa y satén delgado para mujeres

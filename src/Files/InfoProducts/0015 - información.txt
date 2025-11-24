@@ -1,0 +1,5 @@
+Nombre: Vestido tubo
+Marca: INAWLY  
+Precio: $57.290  
+Tallas: XS  S  M  L
+Descripción: Vestido tubo unicolor ribete con fruncido, fruncido de muslo con abertura

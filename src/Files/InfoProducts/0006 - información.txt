@@ -1,0 +1,5 @@
+Nombre: Conjunto de 2 piezas 
+Marca : Zara 
+precio: 159,900
+Tallas: XS-S-M-L-XL
+Descripción: Conjunto de 2 piezas :Top descubierto de hombros con decoración de flores 3D y pantalones

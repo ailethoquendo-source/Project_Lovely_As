@@ -1,0 +1,5 @@
+Nombre: Pijama satinada       
+Marca: Moireta
+precio: $72.890 
+Tallas:  S  M  L  XL
+Descripción: Conjunto de 3 piezas de pijama con top de manga corta, pantalones cortos y pantalones de seda sintética con bordado de corazón  

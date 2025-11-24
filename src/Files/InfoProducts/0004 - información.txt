@@ -1,0 +1,5 @@
+Nombre: Pantalón corto
+Marca : Inawly
+Precio: $49,900
+Tallas: 04 - 06 - 08 - 10 - 12 - 14 
+Descripción: Short blanco de tiro alto con pinzas, ideal para un look fresco y elegante.

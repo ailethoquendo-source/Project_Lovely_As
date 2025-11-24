@@ -1,0 +1,5 @@
+Nombre: Vestido corto
+Marca : Sweetra
+Precio: $59,900
+Tallas: XS - S - M - L 
+Descripción: Vestido corto color vino, con diseño sin tirantes y falda con doble capa, perfecto para ocasiones elegantes o casuales.
