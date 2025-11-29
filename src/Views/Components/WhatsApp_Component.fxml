@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="whatsappContainer" maxHeight="350.0" maxWidth="400.0" minHeight="300.0" minWidth="350.0" prefHeight="320.0" prefWidth="380.0" styleClass="whatsapp-container" stylesheets="@../../StyleSheets/ComponentStyleSheets/whatsapp_component.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ComponentControllers.Controller_WhatsApp_Component">
+   <children>
+      <VBox alignment="TOP_CENTER" spacing="15.0" styleClass="whatsapp-content" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+         <children>
+            <Label styleClass="whatsapp-title" text="Selecciona un número de WhatsApp" />
+            
+            <VBox spacing="10.0" styleClass="numbers-container">
+               <Button fx:id="number1Button" onAction="#handleNumber1Click" onMouseEntered="#onNumber1Enter" onMouseExited="#onNumber1Exit" prefHeight="50.0" prefWidth="300.0" styleClass="whatsapp-number-button">
+                  <graphic>
+                     <HBox alignment="CENTER" spacing="10.0">
+                        <ImageView fx:id="whatsappIcon1" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/whats1.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="+57 313 754 3381" />
+                     </HBox>
+                  </graphic>
+               </Button>
+               <Button fx:id="number2Button" onAction="#handleNumber2Click" onMouseEntered="#onNumber2Enter" onMouseExited="#onNumber2Exit" prefHeight="50.0" prefWidth="300.0" styleClass="whatsapp-number-button">
+                  <graphic>
+                     <HBox alignment="CENTER" spacing="10.0">
+                        <ImageView fx:id="whatsappIcon2" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/whats1.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="+57 300 593 0262" />
+                     </HBox>
+                  </graphic>
+               </Button>
+               <Button fx:id="number3Button" onAction="#handleNumber3Click" onMouseEntered="#onNumber3Enter" onMouseExited="#onNumber3Exit" prefHeight="50.0" prefWidth="300.0" styleClass="whatsapp-number-button">
+                  <graphic>
+                     <HBox alignment="CENTER" spacing="10.0">
+                        <ImageView fx:id="whatsappIcon3" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Images/whats1.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="+57 313 629 6899" />
+                     </HBox>
+                  </graphic>
+               </Button>
+            </VBox>
+            
+            <Button fx:id="cancelButton" onAction="#handleCancelClick" prefHeight="40.0" prefWidth="120.0" styleClass="whatsapp-cancel-button" text="Cancelar" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
