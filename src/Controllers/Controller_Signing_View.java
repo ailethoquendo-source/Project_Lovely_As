@@ -1,32 +1,19 @@
 package Controllers;
 
-import DataStructures.Data_Manager;
-import DataStructures.List_Double_User;
+import DataStructures.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.*;
+import java.util.logging.*;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -74,11 +61,10 @@ public class Controller_Signing_View implements Initializable {
     private Label passwordIcon;
     @FXML
     private Label confirmPasswordIcon;
-
-    // Contador de clics en el logo para determinar Admin/Client
+    
     private int logoClickCount = 0;
     private Timer clickTimer;
-    private static final long CLICK_TIMEOUT = 2000; // 2 segundos para resetear el contador
+    private static final long CLICK_TIMEOUT = 2000;
     private boolean isAdmin = false;
 
     private final List_Double_User userList = Data_Manager.getManager().getList_user();
@@ -174,8 +160,7 @@ public class Controller_Signing_View implements Initializable {
             double currentX = currentStage.getX();
             double currentY = currentStage.getY();
             boolean isMaximized = currentStage.isMaximized();
-            
-            // Eliminar el handler de cierre para permitir cerrar la aplicación desde login
+                        
             currentStage.setOnCloseRequest(null);
             
             Parent root = FXMLLoader.load(getClass().getResource("/Views/Login_View.fxml"));
