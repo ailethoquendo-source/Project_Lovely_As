@@ -2,25 +2,15 @@ package Controllers;
 
 import Controllers.ComponentControllers.Controller_Product_Component;
 import Models.Product;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.nio.file.*;
+import java.util.*;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class Controller_Main_View implements Initializable {
@@ -83,8 +73,7 @@ public class Controller_Main_View implements Initializable {
             double currentX = currentStage.getX();
             double currentY = currentStage.getY();
             boolean isMaximized = currentStage.isMaximized();
-            
-            // Eliminar el handler de cierre para permitir cerrar la aplicación desde login
+                        
             currentStage.setOnCloseRequest(null);
             
             Parent root = FXMLLoader.load(getClass().getResource("/Views/Login_View.fxml"));
