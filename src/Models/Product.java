@@ -1,5 +1,7 @@
 package Models;
 
+import java.time.LocalDateTime;
+
 public class Product {
 
     private int idProduct;
@@ -8,7 +10,10 @@ public class Product {
     private String[] sizes;
     private float price;
     private String description;
-
+    private String email_customer;
+    private LocalDateTime date_purchase;
+    private String selectedSize;
+    
     public Product() {
     }
 
@@ -68,4 +73,28 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }        
+
+    public String getEmail_customer() {
+        return email_customer;
+    }
+
+    public void setEmail_customer(String email_customer) {
+        this.email_customer = email_customer;
+    }
+
+    public LocalDateTime getDate_purchase() {
+        return date_purchase;
+    }
+
+    public void setDate_purchase(LocalDateTime date_purchase) {
+        this.date_purchase = date_purchase;
+    }
+    
+    public String getSelectedSize() {
+        return selectedSize;
+    }
+    
+    public void setSelectedSize(String selectedSize) {
+        this.selectedSize = selectedSize;
+    }
 }
