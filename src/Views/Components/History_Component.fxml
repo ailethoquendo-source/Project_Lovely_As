@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="historyContainer" maxHeight="600.0" maxWidth="950.0" minHeight="550.0" minWidth="950.0" prefHeight="600.0" prefWidth="950.0" styleClass="history-container" stylesheets="@../../StyleSheets/ComponentStyleSheets/history_component.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ComponentControllers.Controller_History_Component">
+    
+    <VBox alignment="TOP_CENTER" spacing="15.0" styleClass="history-content" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        </padding>
+        
+        <!-- Título -->
+        <Label styleClass="history-title" text="Historial de Compras" />
+        
+        <!-- Tabla de productos -->
+        <TableView fx:id="historyTable" maxHeight="450.0" maxWidth="910.0" minHeight="400.0" minWidth="910.0" prefHeight="450.0" prefWidth="910.0" styleClass="history-table">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="120.0" text="ID PRODUCTO" />
+                <TableColumn fx:id="brandColumn" prefWidth="120.0" text="MARCA" />
+                <TableColumn fx:id="nameColumn" prefWidth="200.0" text="NOMBRE" />
+                <TableColumn fx:id="priceColumn" prefWidth="120.0" text="PRECIO" />
+                <TableColumn fx:id="dateColumn" prefWidth="150.0" text="FECHA" />
+                <TableColumn fx:id="emailColumn" prefWidth="200.0" text="CORREO USUARIO" />
+            </columns>
+        </TableView>
+        
+        <!-- Botón Salir -->
+        <HBox alignment="CENTER_RIGHT">
+            <Button fx:id="exitButton" prefWidth="100.0" styleClass="history-exit-button" text="Salir" />
+        </HBox>
+    </VBox>
+</AnchorPane>
