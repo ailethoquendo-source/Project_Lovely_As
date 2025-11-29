@@ -124,4 +124,7 @@
              <Button fx:id="signingUpOptionButton" mnemonicParsing="false" onAction="#onSigningUpOptionClick" prefHeight="50.0" prefWidth="350.0" styleClass="login-button" text="Signing Up" />
          </VBox>
      </StackPane>
+     
+     <!-- Overlay para selección de WhatsApp -->
+     <StackPane fx:id="whatsappOverlay" alignment="CENTER" styleClass="whatsapp-overlay" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 </AnchorPane>
