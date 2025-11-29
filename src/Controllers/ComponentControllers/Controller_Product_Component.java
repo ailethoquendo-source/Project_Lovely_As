@@ -1,5 +1,6 @@
 package Controllers.ComponentControllers;
 
+import DataStructures.*;
 import Models.Product;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,10 +23,51 @@ public class Controller_Product_Component implements Initializable {
     private Button addToCartButton;
     
     private Product product;
+    private String userEmail;
+    private Runnable onAddToCartCallback;
+    private Runnable onProductDetailCallback;
+    
+    private final Stack_Of_Product productStack = Data_Manager.getManager().getStack_Product();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {        
         addToCartButton.setOnAction(e -> handleAddToCart());
+                
+        if (productImageView != null) {
+            Tooltip tooltip = new Tooltip("Haz doble click\npara ver más\ninformación.");
+            tooltip.setStyle(
+                "-fx-background-color: #FFFACD; " +
+                "-fx-background-radius: 10px; " +
+                "-fx-border-color: #000000; " +
+                "-fx-border-width: 3px; " +
+                "-fx-border-radius: 10px; " +
+                "-fx-text-fill: #000000; " +
+                "-fx-font-size: 14px; " +
+                "-fx-font-weight: bold; " +
+                "-fx-padding: 10px 15px;"
+            );
+            Tooltip.install(productImageView, tooltip);
+                    
+            productImageView.setOnMouseClicked(e -> {
+                if (e.getClickCount() == 2) {                    
+                    if (onProductDetailCallback != null) {
+                        onProductDetailCallback.run();
+                    }
+                }
+            });
+        }
+    }
+    
+    public void setUserEmail(String email) {
+        this.userEmail = email;
+    }
+    
+    public void setOnAddToCartCallback(Runnable callback) {
+        this.onAddToCartCallback = callback;
+    }
+    
+    public void setOnProductDetailCallback(Runnable callback) {
+        this.onProductDetailCallback = callback;
     }
     
     public void setProduct(Product product) {
@@ -58,12 +100,38 @@ public class Controller_Product_Component implements Initializable {
     }
     
     private void handleAddToCart() {
-        if (product != null && sizeComboBox.getValue() != null) {    
-            System.out.println("Agregando al carrito: " + product.getName() + 
-                             " - Talla: " + sizeComboBox.getValue());            
-        } else if (sizeComboBox.getValue() == null) {
-            System.out.println("Por favor selecciona una talla");
+        if (product == null) {
+            showAlert(Alert.AlertType.WARNING, "Advertencia", "No hay producto seleccionado.");
+            return;
         }
+        
+        if (sizeComboBox.getValue() == null) {
+            showAlert(Alert.AlertType.WARNING, "Advertencia", "Por favor selecciona una talla.");
+            return;
+        }
+        
+        if (userEmail == null || userEmail.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Advertencia", "No se pudo identificar el usuario.");
+            return;
+        }
+        
+        String selectedSize = sizeComboBox.getValue();
+        boolean added = productStack.addToCart(product, userEmail, selectedSize);
+        if (added) {
+            showAlert(Alert.AlertType.INFORMATION, "Éxito", "Producto agregado al carrito.");
+            if (onAddToCartCallback != null) {
+                onAddToCartCallback.run();
+            }
+        } else {
+            showAlert(Alert.AlertType.WARNING, "Advertencia", "El producto ya está en el carrito.");
+        }
+    }
+    
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
     
     public Product getProduct() {
