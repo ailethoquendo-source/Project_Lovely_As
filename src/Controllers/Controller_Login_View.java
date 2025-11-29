@@ -56,6 +56,9 @@ public class Controller_Login_View implements Initializable {
     private Button loginOptionButton;
     @FXML
     private Button signingUpOptionButton;
+    
+    @FXML
+    private StackPane whatsappOverlay;
 
     private final List_Double_User userList = Data_Manager.getManager().getList_user();
 
@@ -161,7 +164,53 @@ public class Controller_Login_View implements Initializable {
 
     @FXML
     private void onWhatsAppClick(MouseEvent event) {
-
+        showWhatsAppDialog();
+    }
+    
+    private void showWhatsAppDialog() {
+        if (whatsappOverlay == null) {
+            alert(Alert.AlertType.ERROR, "Error", "No se pudo inicializar el panel de WhatsApp.");
+            return;
+        }
+        
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/Views/Components/WhatsApp_Component.fxml")
+            );
+            AnchorPane whatsappPane = loader.load();
+            
+            Controllers.ComponentControllers.Controller_WhatsApp_Component controller = loader.getController();
+            controller.setOnCloseCallback(() -> {
+                hideWhatsAppDialog();
+            });
+            
+            whatsappOverlay.getChildren().clear();
+            whatsappOverlay.getChildren().add(whatsappPane);
+            whatsappOverlay.setVisible(true);
+            whatsappOverlay.setManaged(true);
+                        
+            if (settingsPopup != null && settingsPopup.isVisible()) {
+                settingsPopup.setVisible(false);
+            }
+                        
+            whatsappOverlay.setOnMouseClicked(e -> {
+                if (e.getTarget() == whatsappOverlay) {
+                    hideWhatsAppDialog();
+                }
+            });
+            
+        } catch (IOException e) {
+            Logger.getLogger(Controller_Login_View.class.getName()).log(Level.SEVERE, "Error al cargar el componente de WhatsApp", e);
+            alert(Alert.AlertType.ERROR, "Error", "No se pudo cargar el panel de WhatsApp.");
+        }
+    }
+    
+    private void hideWhatsAppDialog() {
+        if (whatsappOverlay != null) {
+            whatsappOverlay.setVisible(false);
+            whatsappOverlay.setManaged(false);
+            whatsappOverlay.getChildren().clear();
+        }
     }
 
     @FXML
@@ -180,12 +229,21 @@ public class Controller_Login_View implements Initializable {
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
+            if (username.isEmpty() && password.isEmpty()) {
+                alert(Alert.AlertType.WARNING, "Advertencia", "Por favor ingrese su usuario y contraseña.");
+            } else if (username.isEmpty()) {
+                alert(Alert.AlertType.WARNING, "Advertencia", "Por favor ingrese su usuario.");
+            } else {
+                alert(Alert.AlertType.WARNING, "Advertencia", "Por favor ingrese su contraseña.");
+            }
             return;
         }
 
         if (validateUser(username, password)) {
             try {
                 event.consume();
+                                
+                alert(Alert.AlertType.INFORMATION, "Éxito", "Inicio de sesión exitoso. ¡Bienvenido!");
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/Main_View.fxml"));
                 Parent root = loader.load();
@@ -218,6 +276,7 @@ public class Controller_Login_View implements Initializable {
                 newStage.setOnShowing(e -> {
                     controller.getEmailLabel().setText(username);
                     controller.setUserType(isAdmin);
+                    controller.setCurrentUserEmail(username);
                 });
                 
                 oldStage.close();
