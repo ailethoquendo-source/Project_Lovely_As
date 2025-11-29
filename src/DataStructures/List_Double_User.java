@@ -67,11 +67,10 @@ public class List_Double_User {
 
         Node_User actual = head;
 
-        do {
+        while (actual != null) {
             todos.add(actual);
             actual = actual.getNext();
-
-        } while (actual != null && actual != head);
+        }
 
         return todos;
     }
@@ -90,8 +89,16 @@ public class List_Double_User {
     }
 
     public Node_User create_user(TextField usernameField, TextField useridentField, TextField useremailField, PasswordField passwordField, String roll) {
+        
+        if (usernameField.getText().trim().isEmpty() || 
+            useridentField.getText().trim().isEmpty() || 
+            useremailField.getText().trim().isEmpty() || 
+            passwordField.getText().isEmpty()) {
+            alert(Alert.AlertType.WARNING, "Importante..!", "Por favor, complete todos los campos.");
+            return null;
+        }
 
-        Node_User search = search_email(useremailField.getText());
+        Node_User search = search_email(useremailField.getText().trim());
 
         try {
 
@@ -100,12 +107,17 @@ public class List_Double_User {
                 return null;
             } else {
                 Node_User newUser = null;
+                
+                String name = usernameField.getText().trim();
+                String email = useremailField.getText().trim();
+                String password = passwordField.getText();
+                int identification = Integer.parseInt(useridentField.getText().trim());
 
                 if (roll.equals("ADMIN")) {
-                    Admin admin = new Admin(Integer.parseInt(useridentField.getText()), usernameField.getText(), useremailField.getText(), passwordField.getText());
+                    Admin admin = new Admin(identification, name, email, password);
                     newUser = new Node_User(admin);
                 } else {
-                    Client client = new Client(Integer.parseInt(useridentField.getText()), usernameField.getText(), useremailField.getText(), passwordField.getText());
+                    Client client = new Client(identification, name, email, password);
                     newUser = new Node_User(client);
                 }
 
@@ -119,6 +131,10 @@ public class List_Double_User {
             }
 
         } catch (NumberFormatException e) {
+            alert(Alert.AlertType.ERROR, "Error", "La identificación debe ser un número válido.");
+            return null;
+        } catch (Exception e) {
+            alert(Alert.AlertType.ERROR, "Error", "Error inesperado al crear el usuario: " + e.getMessage());
             return null;
         }
 
@@ -151,13 +167,13 @@ public class List_Double_User {
 
         Node_User aux = create_user(usernameField, useridentField, useremailField, passwordField, roll);
 
-        if (aux != null) {
+        if (aux != null) {            
             if (getHead() == null) {
                 setHead(aux);
             } else {
-                aux.setNext(getHead());
-                getHead().setFormer(aux);
-                setHead(aux);
+                Node_User ultimo = getLast();
+                ultimo.setNext(aux);
+                aux.setFormer(ultimo);
             }
         }
     }
@@ -172,19 +188,21 @@ public class List_Double_User {
             Node_User current = head;
 
             while (current != null) {
-
-                writer.write((current.getUser() instanceof Admin ? "ADMIN" : "CLIENT") + ", ");
-                writer.write(current.getUser().getName() + ", ");
-                writer.write(current.getUser().getIdentification() + ", ");                
-                writer.write(current.getUser().getEmail() + ", ");
-                writer.write(current.getUser().getPassword());
-
-                writer.newLine();
+                if (current.getUser() != null) {
+                    writer.write((current.getUser() instanceof Admin ? "ADMIN" : "CLIENT") + ", ");
+                    writer.write(current.getUser().getName() + ", ");
+                    writer.write(current.getUser().getIdentification() + ", ");                
+                    writer.write(current.getUser().getEmail() + ", ");
+                    writer.write(current.getUser().getPassword());
+                    writer.newLine();
+                }
 
                 current = current.getNext();
             }
         } catch (IOException e) {
             System.out.println("Error al guardar los datos en el archivo de usuarios: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error inesperado al guardar usuarios: " + e.getMessage());
         }
     }
 
@@ -201,19 +219,40 @@ public class List_Double_User {
             clear_list();
 
             while ((line = reader.readLine()) != null) {
+                line = line.trim();
+                                
+                if (line.isEmpty()) {
+                    continue;
+                }
 
                 String[] atributes = line.split(", ");
+                
+                if (atributes.length != 5) {
+                    System.out.println("Error: Formato incorrecto en línea: " + line);
+                    continue;
+                }
 
-                String roll = atributes[0];
-                String name = atributes[1];
-                int identification = Integer.parseInt(atributes[2]);
-                String email = atributes[3];
-                String password = atributes[4];
+                try {
+                    String roll = atributes[0].trim();
+                    String name = atributes[1].trim();
+                    int identification = Integer.parseInt(atributes[2].trim());
+                    String email = atributes[3].trim();
+                    String password = atributes[4].trim();
+                    
+                    if (!roll.equals("ADMIN") && !roll.equals("CLIENT")) {
+                        System.out.println("Error: Rol inválido en línea: " + line);
+                        continue;
+                    }
 
-                addUser(name, identification, email, password, roll);
+                    addUser(name, identification, email, password, roll);
+                } catch (NumberFormatException e) {
+                    System.out.println("Error: Identificación inválida en línea: " + line);
+                }
             }            
         } catch (IOException e) {
             System.out.println("Error al cargar los datos desde el archivo Users: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error inesperado al cargar usuarios: " + e.getMessage());
         }
     }
 }
