@@ -247,8 +247,7 @@ public class Stack_Of_Product {
                                 System.out.println("Error al parsear la fecha: " + attributes[2] + " - " + e.getMessage());
                             }
                         }
-                        
-                        // Leer selectedSize si existe (compatibilidad hacia atrás)
+                                                
                         if (attributes.length > 3 && !attributes[3].trim().equals("NULL")) {
                             product.setSelectedSize(attributes[3].trim());
                         } else {
