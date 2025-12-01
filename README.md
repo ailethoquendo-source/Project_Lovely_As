@@ -31,7 +31,7 @@ Para acceder a la aplicación, debe iniciar sesión con sus credenciales:
 
 **Imagen de referencia:**
 
-[Espacio reservado para imagen del formulario de login]
+<img width="1000" height="500" alt="image" src="https://github.com/user-attachments/assets/1b581025-7a9a-4a41-8589-5b031c968c29" />
 
 ---
 
@@ -52,7 +52,7 @@ Si no tiene una cuenta, puede registrarse siguiendo estos pasos:
 
 **Imagen de referencia:**
 
-[Espacio reservado para imagen del formulario de registro]
+![Imagen de WhatsApp 2025-11-30 a las 18 12 51_cfc11bf8](https://github.com/user-attachments/assets/a60cb36c-d4fe-442a-9fc8-77fd5773a73f)
 
 ---
 
@@ -74,7 +74,7 @@ Una vez iniciada la sesión, accederá a la pantalla principal que contiene:
 
 **Imagen de referencia:**
 
-[Espacio reservado para imagen de la vista principal]
+![Imagen de WhatsApp 2025-11-30 a las 18 19 37_b110ba9e](https://github.com/user-attachments/assets/13e3685a-128a-4714-bbc8-1901408c2f39)
 
 ---
 
@@ -97,7 +97,7 @@ El catálogo de productos se muestra en la pantalla principal:
 
 **Imagen de referencia:**
 
-[Espacio reservado para imagen del catálogo de productos]
+<img width="1000" height="500" alt="image" src="https://github.com/user-attachments/assets/9971bc22-a6b4-4b62-a7d0-6d9e0541a3b7" />
 
 ---
 
@@ -122,7 +122,7 @@ Para ver información detallada de un producto:
 
 **Imagen de referencia:**
 
-[Espacio reservado para imagen del panel de detalles de producto]
+<img width="1000" height="500" alt="image" src="https://github.com/user-attachments/assets/bcf712e5-41c2-40b7-8634-ebc8561d6aac" />
 
 ---
 
@@ -146,7 +146,13 @@ Puede agregar productos al carrito de dos formas:
 
 **Imagen de referencia:**
 
-[Espacio reservado para imagen del proceso de agregar al carrito]
+1: 
+<img width="212" height="185" alt="image" src="https://github.com/user-attachments/assets/3cbdbb4b-7afb-4492-96bd-b3b8fb0f07c7" />
+
+2:
+<img width="414" height="282" alt="image" src="https://github.com/user-attachments/assets/3b77fa9c-fdcf-49be-a2c7-35c27e22f69a" />
+
+3: 
 
 ---
 
@@ -196,7 +202,7 @@ Para acceder al carrito de compras:
 
 **Imagen de referencia:**
 
-[Espacio reservado para imagen del carrito de compras]
+<img width="643" height="591" alt="image" src="https://github.com/user-attachments/assets/780787a3-367e-4505-9e37-3df62dec0014" />
 
 ---
 
@@ -222,7 +228,7 @@ Para acceder a la lista de favoritos:
 
 **Imagen de referencia:**
 
-[Espacio reservado para imagen de la lista de favoritos]
+<img width="650" height="600" alt="image" src="https://github.com/user-attachments/assets/41e94af8-3b96-493f-80f0-0f1bb179f281" />
 
 ---
 
@@ -244,7 +250,7 @@ Para realizar una compra:
 
 **Imagen de referencia:**
 
-[Espacio reservado para imagen del proceso de pago]
+<img width="651" height="600" alt="image" src="https://github.com/user-attachments/assets/c2475e53-6f74-43d9-a031-d19f234b7ef4" />
 
 ---
 
@@ -265,7 +271,7 @@ Para cambiar su contraseña:
 
 **Imagen de referencia:**
 
-[Espacio reservado para imagen del formulario de cambio de contraseña]
+<img width="465" height="464" alt="image" src="https://github.com/user-attachments/assets/06a7aa32-ada9-4ad8-9177-685d45b92355" />
 
 ---
 
@@ -284,7 +290,7 @@ Para contactar por WhatsApp:
 
 **Imagen de referencia:**
 
-[Espacio reservado para imagen del overlay de WhatsApp]
+<img width="378" height="333" alt="image" src="https://github.com/user-attachments/assets/77b89128-a6ef-48d4-aad3-3bf6951ad1ef" />
 
 ---
 
@@ -307,7 +313,7 @@ Esta funcionalidad está disponible únicamente para usuarios administradores:
 
 **Imagen de referencia:**
 
-[Espacio reservado para imagen del historial de compras]
+<img width="909" height="605" alt="image" src="https://github.com/user-attachments/assets/f4c1e750-31ee-458f-8ba6-25df64e7c465" />
 
 ---
 
@@ -327,7 +333,7 @@ Para cerrar sesión:
 
 **Imagen de referencia:**
 
-[Espacio reservado para imagen del diálogo de confirmación de cierre de sesión]
+<img width="712" height="275" alt="image" src="https://github.com/user-attachments/assets/3a5653c5-3346-4cb9-9561-38a1bebcfbd6" />
 
 ---
 
